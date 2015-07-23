@@ -1,2 +1,2 @@
 # python
-test brunch'ının denemek için eklendi .
+test branch'ının denemek için eklendi .
