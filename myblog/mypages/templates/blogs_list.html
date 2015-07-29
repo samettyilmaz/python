@@ -1,11 +1,11 @@
 <html>
 <title>Lİsteleme</title>
 <body>
-<h1></h1>
+<h1>Listeleme</h1>
 
 <ul>
   {% for object in object_list %}
-    <div class="header">
+    <div class="">
     <h1>{{object.title}}</h1>
     {{object.article}}
     </div>
@@ -17,7 +17,10 @@
 
 
 
-<a href="{% url "add_article" %}">add article</a>
+<a href="{% url "add_article" %}">add article</a></br>
+
+<a href="{% url "add_comment" %}">add comment</a>
+
 
 </body>
 </html>

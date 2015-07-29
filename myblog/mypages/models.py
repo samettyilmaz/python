@@ -12,5 +12,10 @@ class Comment(models.Model):
     comment = models.TextField()
     blog_article = models.ForeignKey('Blog')
 
-    
-   
+     
+
+    def __unicode__(self):
+
+        return ' '.join([
+            self.title,
+        ])

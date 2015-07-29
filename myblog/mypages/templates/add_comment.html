@@ -6,12 +6,12 @@
 
 <h1>Add Article</h1>,
 
-<form action="{% url 'add_article' %}" method="POST">
+<form action="{% url 'add_comment' %}" method="POST">
   {% csrf_token %}
   <ul>
     {{ form.as_ul }}
   </ul>
-  <input id="save_article" type="submit" value="Save" />
+  <input id="save_comment" type="submit" value="Save" />
 </form>
 
 <a href="{% url "list" %}">back to list</a>
