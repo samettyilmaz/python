@@ -13,4 +13,4 @@ class Comment(models.Model):
     blog_article = models.ForeignKey('Blog')
 
     
- 
+   

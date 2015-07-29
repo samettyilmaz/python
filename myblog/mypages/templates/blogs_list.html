@@ -1,14 +1,23 @@
-<h1>Articles</h1>
+<html>
+<title>Lİsteleme</title>
+<body>
+<h1></h1>
 
 <ul>
-  {% for Blog in ListBlogView %}
-    <li class="Blog">{{ Blog.title }}</li>
+  {% for object in object_list %}
+    <div class="header">
+    <h1>{{object.title}}</h1>
+    {{object.article}}
+    </div>
+        {% for comment in object.comment_set.all %}
+            <li>{{ comment.comment}}</li>
+        {% endfor %}
   {% endfor %}
 </ul>
 
 
-<ul>
-  {% for Blog in ListBlogView %}
-    <li class="Blog">{{ Blog.article }}</li>
-  {% endfor %}
-</ul>
+
+<a href="{% url "add_article" %}">add article</a>
+
+</body>
+</html>

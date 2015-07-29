@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 import mypages.views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from django.contrib import admin
 
@@ -10,7 +11,8 @@ urlpatterns = patterns('',
     # url(r'^$', 'myblog.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^article-list/', mypages.views.ListBlogView.as_view()),
+    url(r'^article_list$', mypages.views.ListBlogView.as_view(),name='list',),
+    url(r'^new$', mypages.views.CreateBlogView.as_view(),name='add_article',),
 
     url(r'^admin/', include(admin.site.urls)),
 )
