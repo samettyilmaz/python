@@ -1,0 +1,53 @@
+
+
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+ <head>   
+    <title>{% block title %}My base Template{% endblock %}</title>
+<link rel="stylesheet" type="text/css" href="{% static "assets/css/default.css" %} ">
+
+</head>
+
+
+<body>
+ <li><a href="/accounts/login/">Login</a></li>
+        <li><a href="/admin/">Admin</a></li>
+                        {% if not user.is_authenticated %}
+
+                    <li><a href="/accounts/register/">Registration</a></li>
+                         {% endif %}
+    <div id="page">
+        <div id="sidebar">
+            {% block sidebar %}
+                <ul>
+
+                <li><a href="/articles/">Articles</a></li>
+                {% if user.is_authenticated %}
+
+                    
+                    <li><a href="/my_articles/">My Articles</a></li>
+                    <li><a href="/accounts/loggedin/">Personal page</a></li>
+                    <li><a href="/edit_articles/">Edit your post</a></li>
+                   
+                {% endif %}
+
+                </ul>
+            {% endblock %}
+        </div>
+
+
+        <div id="content">
+            {% block content %}{% endblock %}
+            <img src="{% static "assets/images/python.jpg"%}"  align="right" width="100" />
+
+        </div>
+
+    </div>
+</body>
+
+</html>>

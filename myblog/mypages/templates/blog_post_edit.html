@@ -1,0 +1,24 @@
+
+
+{% extends "base.html" %}
+
+
+{% block content  %}
+
+
+
+    <h1>Edit post {{ post }}</h1>
+
+
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+        {{ edit_form.as_table }}
+    </table>
+    <input type="submit" name="submit" value="Submit">
+</form>
+
+<a href="/delete/">Delete this article . </a>
+{% endblock %}

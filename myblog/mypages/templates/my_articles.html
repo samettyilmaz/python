@@ -1,0 +1,22 @@
+
+
+{% extends "base.html" %}
+
+
+{% block content  %}
+
+
+
+{% for object in posts %}
+<div>
+<h2><a href="{{ object.get_absolute_url }}">{{  object.title  }}</a> </h2>  
+<p>{{ post.text|truncatewords:"10" }}</p>
+</div>
+{% endfor %} 
+
+
+
+
+
+
+{% endblock%}

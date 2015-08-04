@@ -21,6 +21,12 @@ SECRET_KEY = 'gh^8rvv#n^*myhu02ka2!5=5^7)53q4rqoqr-6vzhtcty^bcyx'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+REGISTRATION_OPEN = True                # If True, users can register
+ACCOUNT_ACTIVATION_DAYS = 7     # One-week activation window; you may, of course, use a different value.
+REGISTRATION_AUTO_LOGIN = True  # If True, the user will be automatically logged in.
+LOGIN_REDIRECT_URL = '/articles/'  # The page you want users to arrive at after they successful log in
+LOGIN_URL = '/accounts/login/'  # The page users are directed to if they are not logged in,
+
 
 TEMPLATE_DEBUG = True
 
@@ -38,6 +44,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'mypages',
     'south',
+    'registration',
+   
 )
 
 MIDDLEWARE_CLASSES = (
@@ -82,7 +90,14 @@ USE_L10N = True
 USE_TZ = True
 
 
+MEDIA_ROOT='/home/samet/intern/venv/python/myblog'
+MEDIA_URL=''
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
-
+STATIC_ROOT=os.path.join('/home/samet/intern/venv/python/myblog', 'static')
 STATIC_URL = '/static/'
+STATICFILES_DIRS=(('assets' ,'/home/samet/intern/venv/python/myblog/mypages/static'),
+
+
+    )

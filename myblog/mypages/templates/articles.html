@@ -1,0 +1,25 @@
+
+{% extends "base.html" %}
+
+
+
+{% block content  %}
+
+
+
+{% for object in articles %}
+<div>
+<h2><a href="{{ object.get_absolute_url }}">{{  object.title  }} </a> written by {{ object.author }} </h2>  
+
+<p>{{ object.text|truncatewords:10  }}...</p>
+<p >{{ object.like }} People liked this article. </p>
+
+</div>
+{% endfor %} 
+
+
+
+
+
+
+{% endblock%}

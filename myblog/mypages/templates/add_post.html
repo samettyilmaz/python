@@ -1,0 +1,22 @@
+
+
+{% extends "base.html" %}
+
+
+{% block content  %}
+
+
+
+<h2>Hello {{ user.username }}</h2>
+<br />
+<h2>Add new post</h2>
+<form action="" method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <button class="button save" name="save" type="submit">SAVE</button>
+
+    <a href="{% url "articles" %}">Back to list </a>
+</form>
+{% endblock %}

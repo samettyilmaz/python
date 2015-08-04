@@ -1,0 +1,26 @@
+
+
+{% extends "base.html" %}
+
+
+{% block content  %}
+
+
+
+{% for object in edits %}
+<div>
+<h2><a href="{% url 'blog_post_edit'  object.slug  %}">{{  object.title  }}</a> 
+<a href="{% url 'blog_post_edit'  object.slug  %}" ><button class="button">edit</button></a>
+<a href="{% url 'blog_delete_post'  object.slug  %}" ><button class="button">delete</button></a>
+
+
+<p>{{ post.text|lower|truncatewords:"10" }}</p>
+</div>
+{% endfor %} 
+
+
+
+
+
+
+{% endblock%}
