@@ -8,18 +8,21 @@
 
 
  <head>   
-    <title>{% block title %}My base Template{% endblock %}</title>
+    <title>{% block title %}My Blog{% endblock %}</title>
 <link rel="stylesheet" type="text/css" href="{% static "assets/css/default.css" %} ">
+<script src ="{% static "assets/js/jquery.nicescroll.min.js" %}"></script>
+<script src ="{% static "assets/js/ajax.js" %}"></script>
 
 </head>
 
 
 <body>
- <li><a href="/accounts/login/">Login</a></li>
-        <li><a href="/admin/">Admin</a></li>
+                            <li><a href="/admin/">Admin</a></li>
                         {% if not user.is_authenticated %}
 
                     <li><a href="/accounts/register/">Registration</a></li>
+                     <li><a href="/accounts/login/">Login</a></li>
+
                          {% endif %}
     <div id="page">
         <div id="sidebar">
@@ -35,8 +38,15 @@
                     <li><a href="/edit_articles/">Edit your post</a></li>
                    
                 {% endif %}
-
                 </ul>
+
+                  <h2>Search</h2>
+                {% csrf_token %}
+                <input type="text" id="search" name="search" />
+                <ul id="search_results">
+                    
+                </ul>
+
             {% endblock %}
         </div>
 
@@ -50,4 +60,4 @@
     </div>
 </body>
 
-</html>>
+</html>>    

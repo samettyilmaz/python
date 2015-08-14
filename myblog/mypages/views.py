@@ -10,7 +10,7 @@ from django.contrib.auth.forms import  UserCreationForm
 
 @user_passes_test(lambda u: u.is_authenticated())
 def add_post(request):
-    form = PostForm(request.POST or None)
+    form = PostForm(request.POST or None,request.FILES or None)
     if form.is_valid():
         post = form.save(commit=False)
         post.author = request.user
@@ -21,10 +21,11 @@ def add_post(request):
                               context_instance=RequestContext(request))
 
 
-@user_passes_test(lambda u: u.is_authenticated())
+@user_passes_test(lambda u: u.is_staff)
 def delete_post(request,slug):
-  if post.author == request.user :
+
     post = Post.objects.get(slug=slug).delete()
+    
     return HttpResponseRedirect('/edit_articles/')
 
 @user_passes_test(lambda u: u.is_authenticated())
@@ -92,6 +93,14 @@ def like_post(request,slug):
     a.like = count
     a.save()
   return HttpResponseRedirect('/post/%s' % slug )
+
+def search(request):
+  if request.method == "POST" :
+    search_title = request.POST['search_title']
+  else :
+    search_title = ''
+  posts=Post.objects.filter(title__contains=search_title)
+  render_to_response('search.html',{'posts': posts})
 
 
 

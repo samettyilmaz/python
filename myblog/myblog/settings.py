@@ -45,7 +45,8 @@ INSTALLED_APPS = (
     'mypages',
     'south',
     'registration',
-   
+    'tastypie',
+      
 )
 
 MIDDLEWARE_CLASSES = (
@@ -90,14 +91,17 @@ USE_L10N = True
 USE_TZ = True
 
 
-MEDIA_ROOT='/home/samet/intern/venv/python/myblog'
-MEDIA_URL=''
+MEDIA_ROOT='/home/samet/intern/venv/python/myblog/mypages/static'
+MEDIA_URL='/media/'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
-STATIC_ROOT=os.path.join('/home/samet/intern/venv/python/myblog', 'static')
+STATIC_ROOT='/home/samet/intern/venv/python/myblog/static'
 STATIC_URL = '/static/'
 STATICFILES_DIRS=(('assets' ,'/home/samet/intern/venv/python/myblog/mypages/static'),
 
 
     )
+ 
+
