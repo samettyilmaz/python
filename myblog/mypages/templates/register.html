@@ -3,10 +3,11 @@
 
 {% block content %}
 <h2>Register</h2>
-<form action="/accounts/register/" method="POST">
+<form action="/accounts/register/" method="POST" enctype="multipart/form-data"s>
     {% csrf_token %}
-
-    {{form}}
+    <table>
+        {{ form.as_table }}
+    </table>
     <input type="submit" value="Register" />
 
 

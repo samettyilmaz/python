@@ -10,7 +10,6 @@ def get_upload_file_name(instance,filename):
 
 class Post(models.Model):
     title = models.CharField(max_length=150)
-    slug = models.SlugField(unique=False)
     text = models.TextField()
     finished=models.BooleanField(default=True)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -25,17 +24,14 @@ class Post(models.Model):
     def get_absolute_url(self):
         return ('blog_post_detail', (), 
                 {
-                    'slug' :self.slug,
+                    'id' :self.id,
                 })
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title)
         super(Post, self).save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title)
+       
         super(Post, self).delete(*args, **kwargs)
 
 

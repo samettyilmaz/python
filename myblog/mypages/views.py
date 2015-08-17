@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import redirect, render_to_response, get_object_or_404,render
 from django.template import RequestContext
 from models import Post
+from django.db.models import Q
 from django.contrib import auth
 from django.core.context_processors import csrf
 from forms import PostForm, CommentForm
@@ -12,6 +13,7 @@ from django.contrib.auth.forms import  UserCreationForm
 def add_post(request):
     form = PostForm(request.POST or None,request.FILES or None)
     if form.is_valid():
+     
         post = form.save(commit=False)
         post.author = request.user
         post.save()
@@ -63,8 +65,8 @@ def edit_pages(request):
     return render(request,"edit_articles.html",{"edits":edits})
 
 
-def view_post(request, slug):
-    post = get_object_or_404(Post, slug=slug)
+def view_post(request, id):
+    post = get_object_or_404(Post, id=id)
     form = CommentForm(request.POST or None)
 
     if form.is_valid():
@@ -84,6 +86,8 @@ def view_post(request, slug):
                                   'form': form,
                               },
                               context_instance=RequestContext(request))
+  
+  
 
 def like_post(request,slug):
   if slug:
@@ -96,11 +100,12 @@ def like_post(request,slug):
 
 def search(request):
   if request.method == "POST" :
-    search_title = request.POST['search_title']
+    search_title = request.POST['search_text']
   else :
     search_title = ''
   posts=Post.objects.filter(title__contains=search_title)
-  render_to_response('search.html',{'posts': posts})
+  
+  return render_to_response('search.html',{'posts': posts})
 
 
 
@@ -119,7 +124,7 @@ def auth_view(request):
                   
           auth.login(request,user)
 
-          return HttpResponseRedirect('/accounts/loggedin')
+          return HttpResponseRedirect('/articles/')
       else:
           return HttpResponseRedirect('/accounts/invalid')
 

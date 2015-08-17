@@ -1,7 +1,7 @@
 
 {%  extends "base.html" %}
 
-
+ <FORM METHOD="LINK" ACTION="/admin/"><INPUT TYPE="submit" VALUE="Admin"></FORM>
 
 
 
@@ -11,9 +11,6 @@
 <h2>Hi {{ full_name }} you are now loggen in ! </h2>
 <p>Click <a href="/accounts/logout/">here </a> to logout . </p>
 
-
-<p>Click <a href="{% url "blog_add_post" %}">here to add an article . </a>
-<p>Click <a href="{% url "my_articles" %}">here to see your articles . </a>
 
 
 {% endblock %}

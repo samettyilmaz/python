@@ -2,50 +2,53 @@
 
 {% load static %}
 
-
-<!DOCTYPE html>
-<html lang="en">
+                      
 
 
  <head>   
     <title>{% block title %}My Blog{% endblock %}</title>
 <link rel="stylesheet" type="text/css" href="{% static "assets/css/default.css" %} ">
-<script src ="{% static "assets/js/jquery.nicescroll.min.js" %}"></script>
+<script src ="{% static "assets/js/jquery-2.1.4.min.js" %}"></script>
 <script src ="{% static "assets/js/ajax.js" %}"></script>
 
 </head>
 
 
 <body>
-                            <li><a href="/admin/">Admin</a></li>
+                    
+                    <ul>
+                        <FORM METHOD="LINK" ACTION="/admin/"><INPUT TYPE="submit" VALUE="Admin"></FORM>
+                        <FORM METHOD="LINK" ACTION="/accounts/loggedin/"><INPUT TYPE="submit" VALUE="Personel Page"></FORM>
                         {% if not user.is_authenticated %}
-
-                    <li><a href="/accounts/register/">Registration</a></li>
-                     <li><a href="/accounts/login/">Login</a></li>
-
-                         {% endif %}
+                        <FORM METHOD="LINK" ACTION="/accounts/register/"><INPUT TYPE="submit" VALUE="Registeration"></FORM>
+                        <FORM METHOD="LINK" ACTION="/accounts/login/"><INPUT TYPE="submit" VALUE="Login"></FORM>
+                        {% endif %}
+                    </ul>
     <div id="page">
         <div id="sidebar">
             {% block sidebar %}
                 <ul>
-
-                <li><a href="/articles/">Articles</a></li>
+                <FORM METHOD="LINK" ACTION="/articles/"><INPUT TYPE="submit" VALUE="Articles"></FORM>
+                
                 {% if user.is_authenticated %}
+                <FORM METHOD="LINK" ACTION="/my_articles/"><INPUT TYPE="submit" VALUE="My Articles"></FORM>
+                <FORM METHOD="LINK" ACTION="/add/post/"><INPUT TYPE="submit" VALUE="Add Article"></FORM>
+                
+                <FORM METHOD="LINK" ACTION="/edit_articles/"><INPUT TYPE="submit" VALUE="Edit your post"></FORM>
 
-                    
-                    <li><a href="/my_articles/">My Articles</a></li>
-                    <li><a href="/accounts/loggedin/">Personal page</a></li>
-                    <li><a href="/edit_articles/">Edit your post</a></li>
-                   
+                  
                 {% endif %}
                 </ul>
 
-                  <h2>Search</h2>
+
+                <h2>Search</h2>
                 {% csrf_token %}
                 <input type="text" id="search" name="search" />
-                <ul id="search_results">
+                <ul id="search-results">
                     
                 </ul>
+
+
 
             {% endblock %}
         </div>
@@ -53,11 +56,11 @@
 
         <div id="content">
             {% block content %}{% endblock %}
-            <img src="{% static "assets/images/python.jpg"%}"  align="right" width="100" />
+            
 
         </div>
 
     </div>
 </body>
 
-</html>>    
+</html>   
