@@ -1,0 +1,64 @@
+*** Settings ***
+Documentation     A resource file with reusable keywords and variables.
+...
+...               The system specific keywords created here form our own
+...               domain specific language. They utilize keywords provided
+...               by the imported Selenium2Library.
+Library           Selenium2Library
+
+*** Variables ***
+${SERVER}         localhost:8000
+${BROWSER}        Chrome
+${DELAY}          0
+${VALID USER}     samet
+${VALID PASSWORD}    samet_00
+${title} 		asas
+${textc} 		asas
+${LOGIN URL}      http://${SERVER}/accounts/login/
+${ADD URL}    	  http://${SERVER}/add/post/
+${ERROR URL}      http://${SERVER}/accounts/invalid/
+
+*** Keywords ***
+Open Browser To Add Page
+    Open Browser    ${ADD URL}    ${BROWSER}
+    Maximize Browser Window
+    Set Selenium Speed    ${DELAY}
+    Add Page Should Be Open
+
+Add Page Should Be Open
+    Title Should Be   Login Page
+
+Go To Add Page
+    Go To    ${ADD URL}
+    Add Page Should Be Open
+
+Input Username
+    [Arguments]    ${username}
+    Input Text    username_field    ${username}
+
+Input Password
+    [Arguments]    ${password}
+    Input Text    password_field    ${password}
+
+
+Submit Credentials
+    Click Button    login_button
+
+
+	Add Page Should Be Open
+	
+
+Input Title
+    [Arguments]    ${title}
+    Input Text    id_title    ${title}
+
+Input Textc
+    [Arguments]    ${textc}
+    Input Text    id_text    ${textc}
+
+Submit Credentialss
+    Click Button    button_save
+
+
+
+

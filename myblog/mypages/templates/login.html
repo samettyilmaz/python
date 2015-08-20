@@ -6,13 +6,12 @@
 {% endif %}
         <form action="/accounts/auth/" method="post" >
                 {% csrf_token %}
-              <label for="username">User Name :</label>
-              <input type="text" name="username" value="" id="username"></input>
-              <label for="password">Password :</labe>
-              <input type="password" name="password" value="" id="password"></input>
+              <label for="username_field">User Name :</label>
+              <input type="text" name="username" value="" id="username_field"></input>
+              <label for="password_field">Password :</labe>
+              <input type="password" name="password" value="" id="password_field"></input>
                 
-              <input type="submit" value="login" />
-                
+<input id="login_button" type="submit" value="LOGIN">                
                 </form>
 
 {% endblock %}

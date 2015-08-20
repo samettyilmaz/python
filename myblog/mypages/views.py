@@ -11,7 +11,7 @@ from django.contrib.auth.forms import  UserCreationForm
 
 @user_passes_test(lambda u: u.is_authenticated())
 def add_post(request):
-    form = PostForm(request.POST or None,request.FILES or None)
+    form = PostForm(request.POST or None)
     if form.is_valid():
      
         post = form.save(commit=False)
@@ -89,14 +89,14 @@ def view_post(request, id):
   
   
 
-def like_post(request,slug):
-  if slug:
-    a=Post.objects.get(slug=slug)
+def like_post(request,id):
+  if id:
+    a=Post.objects.get(id=id)
     count = a.like
     count += 1
     a.like = count
     a.save()
-  return HttpResponseRedirect('/post/%s' % slug )
+  return HttpResponseRedirect('/post/%s' % id )
 
 def search(request):
   if request.method == "POST" :
@@ -124,7 +124,7 @@ def auth_view(request):
                   
           auth.login(request,user)
 
-          return HttpResponseRedirect('/articles/')
+          return HttpResponseRedirect('/add/post/')
       else:
           return HttpResponseRedirect('/accounts/invalid')
 
