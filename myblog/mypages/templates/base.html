@@ -18,7 +18,7 @@
                     
                     <ul>
                         <FORM METHOD="LINK" ACTION="/admin/"><INPUT TYPE="submit" VALUE="Admin"></FORM>
-                        <FORM METHOD="LINK" ACTION="/accounts/loggedin/"><INPUT TYPE="submit" VALUE="Personel Page"></FORM>
+                        <FORM METHOD="LINK" ACTION="/accounts/logout/"><INPUT TYPE="submit" VALUE="Log Out"></FORM>
                         {% if not user.is_authenticated %}
                         <FORM METHOD="LINK" ACTION="/accounts/register/"><INPUT TYPE="submit" VALUE="Registeration"></FORM>
                         <FORM METHOD="LINK" ACTION="/accounts/login/"><INPUT TYPE="submit" VALUE="Login"></FORM>

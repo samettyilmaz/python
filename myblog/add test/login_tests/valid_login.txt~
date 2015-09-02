@@ -1,18 +1,30 @@
 *** Settings ***
-Documentation     A test suite with a single test for valid login.
-...
-...               This test has a workflow that is created using keywords in
-...               the imported resource file.
+Documentation     Creating a sale with validations
+#Suite Teardown   Close Browser
+Suite Setup        Create A Session
 Resource          resource.txt
+Suite Tear Down   Delete All Sessions
 
 *** Test Cases ***
-Valid Login
-    Open Browser To Add Page
-    Input Username    samet
-    Input Password    samet_00
-   
-    Submit Credentials
+Create A New Sale
+	
+	Create
+
+    ${json_data}=   json.dumps   ${data}
+    ${headers}=   Create Dictionary   Content-type=application/json
+
+    ${resp}=  Post Request   CS   https://127.0.0.1:8000/api/v1/post/67   data=${json_data}   headers=${headers}
+	Log   ${resp}
+
+    Should Be Equal As Strings   ${resp.status_code}   200
+    ${json}=   Set Variable   ${resp.json()}
+    Log   ${json}
     
-Input Title    ${title} 
-    Input Textc    ${textc}
-    Submit Credentialss 
+*** Keywords ***
+
+
+*** Variables ***
+#Generating static test dictionary(dictionary in dictionary and list in dictionary) below
+&{data}   author=null created_on=2015-08-31T07:26:11.643020 finished=true id= 56 like=12 resource_uri=/api/v1/post/57/?format=json text=eqwejhqwkehq thumbnail=/media/uploaded_files/%3Cbuilt-in%20function%20time%3E_-.png title=eqweqwe
+
+

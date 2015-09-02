@@ -3,15 +3,18 @@ from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import redirect, render_to_response, get_object_or_404,render
 from django.template import RequestContext
 from models import Post
+from piston.utils import  throttle
 from django.db.models import Q
 from django.contrib import auth
 from django.core.context_processors import csrf
 from forms import PostForm, CommentForm
 from django.contrib.auth.forms import  UserCreationForm
+from django.views.decorators.csrf import csrf_exempt
+
 
 @user_passes_test(lambda u: u.is_authenticated())
 def add_post(request):
-    form = PostForm(request.POST or None)
+    form = PostForm(request.POST or None,request.FILES or None)
     if form.is_valid():
      
         post = form.save(commit=False)
@@ -24,15 +27,15 @@ def add_post(request):
 
 
 @user_passes_test(lambda u: u.is_staff)
-def delete_post(request,slug):
+def delete_post(request,id):
 
-    post = Post.objects.get(slug=slug).delete()
+    post = Post.objects.get(id=id).delete()
     
     return HttpResponseRedirect('/edit_articles/')
 
 @user_passes_test(lambda u: u.is_authenticated())
-def edit_post(request, slug):
-    post = get_object_or_404(Post, slug=slug)
+def edit_post(request, id):
+    post = get_object_or_404(Post, id=id)
     form = PostForm(request.POST or None, instance=post)
     if post.author == request.user :
       if form.is_valid():
@@ -114,6 +117,7 @@ def login(request):
       c.update(csrf(request))
       return render_to_response('login.html',c)
 
+@csrf_exempt
 def auth_view(request):
       username = request.POST.get('username','')
       password = request.POST.get('password','')
@@ -124,7 +128,7 @@ def auth_view(request):
                   
           auth.login(request,user)
 
-          return HttpResponseRedirect('/add/post/')
+          return HttpResponseRedirect('/articles/')
       else:
           return HttpResponseRedirect('/accounts/invalid')
 
@@ -137,7 +141,7 @@ def invalid_login(request):
       
 def logout(request):
           auth.logout(request)
-          return render_to_response('logout.html',{'full_name':request.user.username})
+          return render_to_response('articles.html',{'full_name':request.user.username})
 
 
 def register_user(request):

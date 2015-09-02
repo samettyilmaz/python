@@ -11,14 +11,15 @@
 
 
 
-<form action="" method="POST">
+<form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <table>
         {{ form.as_table }}
         {{ edit_form.as_table }}
     </table>
-    <input type="submit" name="submit" value="Submit">
+    <button id="button_save" name="save" type="submit">save
+    </button>
 </form>
 
-<a href="/delete/">Delete this article . </a>
+<a href="/my_articles/">Delete this article . </a>
 {% endblock %}

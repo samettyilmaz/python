@@ -1,248 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generated="20150818 17:54:03.851" generator="Robot 2.9 (Python 2.7.6 on linux2)">
+<robot generated="20150901 16:19:02.330" generator="Robot 2.9 (Python 2.7.6 on linux2)">
 <suite source="/home/samet/intern/venv/python/myblog/add test/login_tests" id="s1" name="Login Tests">
 <suite source="/home/samet/intern/venv/python/myblog/add test/login_tests/valid_login.txt" id="s1-s1" name="Valid Login">
-<test id="s1-s1-t1" name="Valid Login">
-<kw name="Open Browser To Add Page" library="resource">
-<msg timestamp="20150818 17:54:03.996" level="TRACE">Arguments: [  ]</msg>
-<kw name="Open Browser" library="Selenium2Library">
-<doc>Opens a new browser instance to given URL.</doc>
+<kw type="setup" name="Create A Session" library="resource">
+<doc>Creating a CS called session with API USER and API PASSWORD in variables</doc>
+<kw name="Create List" library="BuiltIn">
+<doc>Returns a list containing given items.</doc>
 <arguments>
-<arg>${ADD URL}</arg>
-<arg>${BROWSER}</arg>
+<arg>${API USER}</arg>
+<arg>${API PASSWORD}</arg>
 </arguments>
-<msg timestamp="20150818 17:54:03.997" level="TRACE">Arguments: [ 'http://localhost:8000/add/post/' | 'Chrome' ]</msg>
-<msg timestamp="20150818 17:54:03.997" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:8000/add/post/'</msg>
-<msg timestamp="20150818 17:54:05.005" level="DEBUG">POST http://127.0.0.1:46947/session {"desiredCapabilities": {"platform": "ANY", "browserName": "chrome", "version": "", "javascriptEnabled": true, "chromeOptions": {"args": [], "extensions": []}}}</msg>
-<msg timestamp="20150818 17:54:05.483" level="DEBUG">Finished Request</msg>
-<msg timestamp="20150818 17:54:05.484" level="DEBUG">POST http://127.0.0.1:46947/session/7c9cab6e1fce8b22a044d5c00aab6e7e/timeouts/async_script {"sessionId": "7c9cab6e1fce8b22a044d5c00aab6e7e", "ms": 5000.0}</msg>
-<msg timestamp="20150818 17:54:05.488" level="DEBUG">Finished Request</msg>
-<msg timestamp="20150818 17:54:05.489" level="DEBUG">POST http://127.0.0.1:46947/session/7c9cab6e1fce8b22a044d5c00aab6e7e/timeouts/implicit_wait {"sessionId": "7c9cab6e1fce8b22a044d5c00aab6e7e", "ms": 0.0}</msg>
-<msg timestamp="20150818 17:54:05.491" level="DEBUG">Finished Request</msg>
-<msg timestamp="20150818 17:54:05.492" level="DEBUG">POST http://127.0.0.1:46947/session/7c9cab6e1fce8b22a044d5c00aab6e7e/url {"url": "http://localhost:8000/add/post/", "sessionId": "7c9cab6e1fce8b22a044d5c00aab6e7e"}</msg>
-<msg timestamp="20150818 17:54:07.431" level="DEBUG">Finished Request</msg>
-<msg timestamp="20150818 17:54:07.432" level="DEBUG">Opened browser with session id 7c9cab6e1fce8b22a044d5c00aab6e7e</msg>
-<msg timestamp="20150818 17:54:07.433" level="TRACE">Return: 1</msg>
-<status status="PASS" endtime="20150818 17:54:07.434" starttime="20150818 17:54:03.996"></status>
+<assign>
+<var>${auth}</var>
+</assign>
+<msg timestamp="20150901 16:19:03.386" level="INFO">${auth} = [u'samet', u'samet_00']</msg>
+<status status="PASS" endtime="20150901 16:19:03.386" starttime="20150901 16:19:03.385"></status>
 </kw>
-<kw name="Maximize Browser Window" library="Selenium2Library">
-<doc>Maximizes current browser window.</doc>
-<msg timestamp="20150818 17:54:07.442" level="TRACE">Arguments: [  ]</msg>
-<msg timestamp="20150818 17:54:07.443" level="DEBUG">POST http://127.0.0.1:46947/session/7c9cab6e1fce8b22a044d5c00aab6e7e/window/current/maximize {"windowHandle": "current", "sessionId": "7c9cab6e1fce8b22a044d5c00aab6e7e"}</msg>
-<msg timestamp="20150818 17:54:07.619" level="DEBUG">Finished Request</msg>
-<msg timestamp="20150818 17:54:07.620" level="TRACE">Return: None</msg>
-<status status="PASS" endtime="20150818 17:54:07.621" starttime="20150818 17:54:07.441"></status>
-</kw>
-<kw name="Set Selenium Speed" library="Selenium2Library">
-<doc>Sets the delay in seconds that is waited after each Selenium command.</doc>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
 <arguments>
-<arg>${DELAY}</arg>
+<arg>${auth}</arg>
 </arguments>
-<msg timestamp="20150818 17:54:07.623" level="TRACE">Arguments: [ '0' ]</msg>
-<msg timestamp="20150818 17:54:07.624" level="TRACE">Return: b'0 seconds'</msg>
-<status status="PASS" endtime="20150818 17:54:07.625" starttime="20150818 17:54:07.622"></status>
+<msg timestamp="20150901 16:19:03.387" level="INFO">[u'samet', u'samet_00']</msg>
+<status status="PASS" endtime="20150901 16:19:03.387" starttime="20150901 16:19:03.386"></status>
 </kw>
-<kw name="Add Page Should Be Open" library="resource">
-<msg timestamp="20150818 17:54:07.627" level="TRACE">Arguments: [  ]</msg>
-<kw name="Title Should Be" library="Selenium2Library">
-<doc>Verifies that current page title equals `title`.</doc>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
 <arguments>
-<arg>Login Page</arg>
+<arg>CS</arg>
+<arg>${SERVER}</arg>
+<arg>auth=${auth}</arg>
+<arg>verify=True</arg>
 </arguments>
-<msg timestamp="20150818 17:54:07.629" level="TRACE">Arguments: [ 'Login Page' ]</msg>
-<msg timestamp="20150818 17:54:07.630" level="DEBUG">GET http://127.0.0.1:46947/session/7c9cab6e1fce8b22a044d5c00aab6e7e/title {"sessionId": "7c9cab6e1fce8b22a044d5c00aab6e7e"}</msg>
-<msg timestamp="20150818 17:54:07.637" level="DEBUG">Finished Request</msg>
-<msg timestamp="20150818 17:54:07.638" level="INFO">Page title is 'Login Page'.</msg>
-<msg timestamp="20150818 17:54:07.638" level="TRACE">Return: None</msg>
-<status status="PASS" endtime="20150818 17:54:07.638" starttime="20150818 17:54:07.628"></status>
+<status status="PASS" endtime="20150901 16:19:03.394" starttime="20150901 16:19:03.387"></status>
 </kw>
-<msg timestamp="20150818 17:54:07.639" level="TRACE">Return: None</msg>
-<status status="PASS" endtime="20150818 17:54:07.639" starttime="20150818 17:54:07.626"></status>
+<status status="PASS" endtime="20150901 16:19:03.394" starttime="20150901 16:19:03.385"></status>
 </kw>
-<msg timestamp="20150818 17:54:07.639" level="TRACE">Return: None</msg>
-<status status="PASS" endtime="20150818 17:54:07.640" starttime="20150818 17:54:03.995"></status>
-</kw>
-<kw name="Input Username" library="resource">
+<test id="s1-s1-t1" name="Create A New Sale">
+<kw name="Dumps" library="json">
+<doc>Serialize ``obj`` to a JSON formatted ``str``.</doc>
 <arguments>
-<arg>samet</arg>
+<arg>${data}</arg>
 </arguments>
-<msg timestamp="20150818 17:54:07.643" level="TRACE">Arguments: [ ${username}='samet' ]</msg>
-<kw name="Input Text" library="Selenium2Library">
-<doc>Types the given `text` into text field identified by `locator`.</doc>
+<assign>
+<var>${json_data}</var>
+</assign>
+<msg timestamp="20150901 16:19:03.397" level="INFO">${json_data} = {"author": "null created_on=2015-08-31T07:26:11.643020 finished=true id= 56 like=12 resource_uri=/api/v1/post/57/ text=eqwejhqwkehq thumbnail=/media/uploaded_files/%3Cbuilt-in%20function%20time%3E_-.p...</msg>
+<status status="PASS" endtime="20150901 16:19:03.397" starttime="20150901 16:19:03.396"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
 <arguments>
-<arg>username_field</arg>
-<arg>${username}</arg>
+<arg>Content-type=application/json</arg>
 </arguments>
-<msg timestamp="20150818 17:54:07.645" level="TRACE">Arguments: [ 'username_field' | 'samet' ]</msg>
-<msg timestamp="20150818 17:54:07.646" level="INFO">Typing text 'samet' into text field 'username_field'</msg>
-<msg timestamp="20150818 17:54:07.647" level="DEBUG">POST http://127.0.0.1:46947/session/7c9cab6e1fce8b22a044d5c00aab6e7e/elements {"using": "xpath", "sessionId": "7c9cab6e1fce8b22a044d5c00aab6e7e", "value": "//*[(@id='username_field' or @name='username_field')]"}</msg>
-<msg timestamp="20150818 17:54:07.669" level="DEBUG">Finished Request</msg>
-<msg timestamp="20150818 17:54:07.670" level="DEBUG">POST http://127.0.0.1:46947/session/7c9cab6e1fce8b22a044d5c00aab6e7e/element/0.6815346472430974-1/clear {"sessionId": "7c9cab6e1fce8b22a044d5c00aab6e7e", "id": "0.6815346472430974-1"}</msg>
-<msg timestamp="20150818 17:54:07.700" level="DEBUG">Finished Request</msg>
-<msg timestamp="20150818 17:54:07.701" level="DEBUG">POST http://127.0.0.1:46947/session/7c9cab6e1fce8b22a044d5c00aab6e7e/element/0.6815346472430974-1/value {"sessionId": "7c9cab6e1fce8b22a044d5c00aab6e7e", "id": "0.6815346472430974-1", "value": ["s", "a", "m", "e", "t"]}</msg>
-<msg timestamp="20150818 17:54:07.776" level="DEBUG">Finished Request</msg>
-<msg timestamp="20150818 17:54:07.777" level="TRACE">Return: None</msg>
-<status status="PASS" endtime="20150818 17:54:07.777" starttime="20150818 17:54:07.644"></status>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20150901 16:19:03.398" level="INFO">${headers} = {u'Content-type': u'application/json'}</msg>
+<status status="PASS" endtime="20150901 16:19:03.398" starttime="20150901 16:19:03.397"></status>
 </kw>
-<msg timestamp="20150818 17:54:07.778" level="TRACE">Return: None</msg>
-<status status="PASS" endtime="20150818 17:54:07.778" starttime="20150818 17:54:07.641"></status>
-</kw>
-<kw name="Input Password" library="resource">
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the</doc>
 <arguments>
-<arg>samet_00</arg>
+<arg>CS</arg>
+<arg>https://127.0.0.1:8000/api/v1/post/</arg>
+<arg>data=${json_data}</arg>
+<arg>headers=${headers}</arg>
 </arguments>
-<msg timestamp="20150818 17:54:07.779" level="TRACE">Arguments: [ ${password}='samet_00' ]</msg>
-<kw name="Input Text" library="Selenium2Library">
-<doc>Types the given `text` into text field identified by `locator`.</doc>
-<arguments>
-<arg>password_field</arg>
-<arg>${password}</arg>
-</arguments>
-<msg timestamp="20150818 17:54:07.780" level="TRACE">Arguments: [ 'password_field' | 'samet_00' ]</msg>
-<msg timestamp="20150818 17:54:07.780" level="INFO">Typing text 'samet_00' into text field 'password_field'</msg>
-<msg timestamp="20150818 17:54:07.781" level="DEBUG">POST http://127.0.0.1:46947/session/7c9cab6e1fce8b22a044d5c00aab6e7e/elements {"using": "xpath", "sessionId": "7c9cab6e1fce8b22a044d5c00aab6e7e", "value": "//*[(@id='password_field' or @name='password_field')]"}</msg>
-<msg timestamp="20150818 17:54:07.813" level="DEBUG">Finished Request</msg>
-<msg timestamp="20150818 17:54:07.814" level="DEBUG">POST http://127.0.0.1:46947/session/7c9cab6e1fce8b22a044d5c00aab6e7e/element/0.6815346472430974-2/clear {"sessionId": "7c9cab6e1fce8b22a044d5c00aab6e7e", "id": "0.6815346472430974-2"}</msg>
-<msg timestamp="20150818 17:54:07.840" level="DEBUG">Finished Request</msg>
-<msg timestamp="20150818 17:54:07.841" level="DEBUG">POST http://127.0.0.1:46947/session/7c9cab6e1fce8b22a044d5c00aab6e7e/element/0.6815346472430974-2/value {"sessionId": "7c9cab6e1fce8b22a044d5c00aab6e7e", "id": "0.6815346472430974-2", "value": ["s", "a", "m", "e", "t", "_", "0", "0"]}</msg>
-<msg timestamp="20150818 17:54:07.914" level="DEBUG">Finished Request</msg>
-<msg timestamp="20150818 17:54:07.914" level="TRACE">Return: None</msg>
-<status status="PASS" endtime="20150818 17:54:07.915" starttime="20150818 17:54:07.779"></status>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20150901 16:19:03.408" level="INFO">Starting new HTTPS connection (1): 127.0.0.1</msg>
+<msg timestamp="20150901 16:19:03.450" level="INFO">Deprication Warning  Use Post Request in the future</msg>
+<msg timestamp="20150901 16:19:03.451" level="FAIL">SSLError: [Errno bad handshake] (-1, 'Unexpected EOF')</msg>
+<status status="FAIL" endtime="20150901 16:19:03.451" starttime="20150901 16:19:03.398"></status>
 </kw>
-<msg timestamp="20150818 17:54:07.916" level="TRACE">Return: None</msg>
-<status status="PASS" endtime="20150818 17:54:07.916" starttime="20150818 17:54:07.778"></status>
-</kw>
-<kw name="Submit Credentials" library="resource">
-<msg timestamp="20150818 17:54:07.918" level="TRACE">Arguments: [  ]</msg>
-<kw name="Click Button" library="Selenium2Library">
-<doc>Clicks a button identified by `locator`.</doc>
-<arguments>
-<arg>login_button</arg>
-</arguments>
-<msg timestamp="20150818 17:54:07.919" level="TRACE">Arguments: [ 'login_button' ]</msg>
-<msg timestamp="20150818 17:54:07.920" level="INFO">Clicking button 'login_button'.</msg>
-<msg timestamp="20150818 17:54:07.920" level="DEBUG">GET http://127.0.0.1:46947/session/7c9cab6e1fce8b22a044d5c00aab6e7e/url {"sessionId": "7c9cab6e1fce8b22a044d5c00aab6e7e"}</msg>
-<msg timestamp="20150818 17:54:07.929" level="DEBUG">Finished Request</msg>
-<msg timestamp="20150818 17:54:07.930" level="DEBUG">POST http://127.0.0.1:46947/session/7c9cab6e1fce8b22a044d5c00aab6e7e/elements {"using": "xpath", "sessionId": "7c9cab6e1fce8b22a044d5c00aab6e7e", "value": "//input[(@id='login_button' or @name='login_button' or @value='login_button' or @src='login_button' or @src='http://localhost:8000/accounts/login/?next=/add/post/login_button')]"}</msg>
-<msg timestamp="20150818 17:54:07.955" level="DEBUG">Finished Request</msg>
-<msg timestamp="20150818 17:54:07.956" level="DEBUG">POST http://127.0.0.1:46947/session/7c9cab6e1fce8b22a044d5c00aab6e7e/element/0.6815346472430974-3/click {"sessionId": "7c9cab6e1fce8b22a044d5c00aab6e7e", "id": "0.6815346472430974-3"}</msg>
-<msg timestamp="20150818 17:54:08.008" level="DEBUG">Finished Request</msg>
-<msg timestamp="20150818 17:54:08.009" level="TRACE">Return: None</msg>
-<status status="PASS" endtime="20150818 17:54:08.010" starttime="20150818 17:54:07.918"></status>
-</kw>
-<kw name="Add Page Should Be Open" library="resource">
-<msg timestamp="20150818 17:54:08.012" level="TRACE">Arguments: [  ]</msg>
-<kw name="Title Should Be" library="Selenium2Library">
-<doc>Verifies that current page title equals `title`.</doc>
-<arguments>
-<arg>Login Page</arg>
-</arguments>
-<msg timestamp="20150818 17:54:08.014" level="TRACE">Arguments: [ 'Login Page' ]</msg>
-<msg timestamp="20150818 17:54:08.015" level="DEBUG">GET http://127.0.0.1:46947/session/7c9cab6e1fce8b22a044d5c00aab6e7e/title {"sessionId": "7c9cab6e1fce8b22a044d5c00aab6e7e"}</msg>
-<msg timestamp="20150818 17:54:08.319" level="DEBUG">Finished Request</msg>
-<msg timestamp="20150818 17:54:08.320" level="INFO">Page title is 'Login Page'.</msg>
-<msg timestamp="20150818 17:54:08.320" level="TRACE">Return: None</msg>
-<status status="PASS" endtime="20150818 17:54:08.320" starttime="20150818 17:54:08.013"></status>
-</kw>
-<msg timestamp="20150818 17:54:08.321" level="TRACE">Return: None</msg>
-<status status="PASS" endtime="20150818 17:54:08.322" starttime="20150818 17:54:08.011"></status>
-</kw>
-<msg timestamp="20150818 17:54:08.322" level="TRACE">Return: None</msg>
-<status status="PASS" endtime="20150818 17:54:08.322" starttime="20150818 17:54:07.917"></status>
-</kw>
-<kw name="Input Title" library="resource">
-<arguments>
-<arg>sasa</arg>
-</arguments>
-<msg timestamp="20150818 17:54:08.324" level="TRACE">Arguments: [ ${title}='sasa' ]</msg>
-<kw name="Input Text" library="Selenium2Library">
-<doc>Types the given `text` into text field identified by `locator`.</doc>
-<arguments>
-<arg>id_title</arg>
-<arg>${title}</arg>
-</arguments>
-<msg timestamp="20150818 17:54:08.325" level="TRACE">Arguments: [ 'id_title' | 'sasa' ]</msg>
-<msg timestamp="20150818 17:54:08.325" level="INFO">Typing text 'sasa' into text field 'id_title'</msg>
-<msg timestamp="20150818 17:54:08.326" level="DEBUG">POST http://127.0.0.1:46947/session/7c9cab6e1fce8b22a044d5c00aab6e7e/elements {"using": "xpath", "sessionId": "7c9cab6e1fce8b22a044d5c00aab6e7e", "value": "//*[(@id='id_title' or @name='id_title')]"}</msg>
-<msg timestamp="20150818 17:54:08.351" level="DEBUG">Finished Request</msg>
-<msg timestamp="20150818 17:54:08.352" level="DEBUG">POST http://127.0.0.1:46947/session/7c9cab6e1fce8b22a044d5c00aab6e7e/element/0.24048321833834052-1/clear {"sessionId": "7c9cab6e1fce8b22a044d5c00aab6e7e", "id": "0.24048321833834052-1"}</msg>
-<msg timestamp="20150818 17:54:08.381" level="DEBUG">Finished Request</msg>
-<msg timestamp="20150818 17:54:08.382" level="DEBUG">POST http://127.0.0.1:46947/session/7c9cab6e1fce8b22a044d5c00aab6e7e/element/0.24048321833834052-1/value {"sessionId": "7c9cab6e1fce8b22a044d5c00aab6e7e", "id": "0.24048321833834052-1", "value": ["s", "a", "s", "a"]}</msg>
-<msg timestamp="20150818 17:54:08.453" level="DEBUG">Finished Request</msg>
-<msg timestamp="20150818 17:54:08.454" level="TRACE">Return: None</msg>
-<status status="PASS" endtime="20150818 17:54:08.454" starttime="20150818 17:54:08.324"></status>
-</kw>
-<msg timestamp="20150818 17:54:08.455" level="TRACE">Return: None</msg>
-<status status="PASS" endtime="20150818 17:54:08.455" starttime="20150818 17:54:08.323"></status>
-</kw>
-<kw name="Input Textc" library="resource">
-<arguments>
-<arg>sasa</arg>
-</arguments>
-<msg timestamp="20150818 17:54:08.457" level="TRACE">Arguments: [ ${textc}='sasa' ]</msg>
-<kw name="Input Text" library="Selenium2Library">
-<doc>Types the given `text` into text field identified by `locator`.</doc>
-<arguments>
-<arg>id_text</arg>
-<arg>${textc}</arg>
-</arguments>
-<msg timestamp="20150818 17:54:08.459" level="TRACE">Arguments: [ 'id_text' | 'sasa' ]</msg>
-<msg timestamp="20150818 17:54:08.460" level="INFO">Typing text 'sasa' into text field 'id_text'</msg>
-<msg timestamp="20150818 17:54:08.460" level="DEBUG">POST http://127.0.0.1:46947/session/7c9cab6e1fce8b22a044d5c00aab6e7e/elements {"using": "xpath", "sessionId": "7c9cab6e1fce8b22a044d5c00aab6e7e", "value": "//*[(@id='id_text' or @name='id_text')]"}</msg>
-<msg timestamp="20150818 17:54:08.482" level="DEBUG">Finished Request</msg>
-<msg timestamp="20150818 17:54:08.482" level="DEBUG">POST http://127.0.0.1:46947/session/7c9cab6e1fce8b22a044d5c00aab6e7e/element/0.24048321833834052-2/clear {"sessionId": "7c9cab6e1fce8b22a044d5c00aab6e7e", "id": "0.24048321833834052-2"}</msg>
-<msg timestamp="20150818 17:54:08.516" level="DEBUG">Finished Request</msg>
-<msg timestamp="20150818 17:54:08.517" level="DEBUG">POST http://127.0.0.1:46947/session/7c9cab6e1fce8b22a044d5c00aab6e7e/element/0.24048321833834052-2/value {"sessionId": "7c9cab6e1fce8b22a044d5c00aab6e7e", "id": "0.24048321833834052-2", "value": ["s", "a", "s", "a"]}</msg>
-<msg timestamp="20150818 17:54:08.589" level="DEBUG">Finished Request</msg>
-<msg timestamp="20150818 17:54:08.589" level="TRACE">Return: None</msg>
-<status status="PASS" endtime="20150818 17:54:08.589" starttime="20150818 17:54:08.458"></status>
-</kw>
-<msg timestamp="20150818 17:54:08.590" level="TRACE">Return: None</msg>
-<status status="PASS" endtime="20150818 17:54:08.590" starttime="20150818 17:54:08.456"></status>
-</kw>
-<kw name="Submit Credentialss" library="resource">
-<msg timestamp="20150818 17:54:08.591" level="TRACE">Arguments: [  ]</msg>
-<kw name="Click Button" library="Selenium2Library">
-<doc>Clicks a button identified by `locator`.</doc>
-<arguments>
-<arg>button_save</arg>
-</arguments>
-<msg timestamp="20150818 17:54:08.593" level="TRACE">Arguments: [ 'button_save' ]</msg>
-<msg timestamp="20150818 17:54:08.594" level="INFO">Clicking button 'button_save'.</msg>
-<msg timestamp="20150818 17:54:08.595" level="DEBUG">GET http://127.0.0.1:46947/session/7c9cab6e1fce8b22a044d5c00aab6e7e/url {"sessionId": "7c9cab6e1fce8b22a044d5c00aab6e7e"}</msg>
-<msg timestamp="20150818 17:54:08.600" level="DEBUG">Finished Request</msg>
-<msg timestamp="20150818 17:54:08.600" level="DEBUG">POST http://127.0.0.1:46947/session/7c9cab6e1fce8b22a044d5c00aab6e7e/elements {"using": "xpath", "sessionId": "7c9cab6e1fce8b22a044d5c00aab6e7e", "value": "//input[(@id='button_save' or @name='button_save' or @value='button_save' or @src='button_save' or @src='http://localhost:8000/add/post/button_save')]"}</msg>
-<msg timestamp="20150818 17:54:08.622" level="DEBUG">Finished Request</msg>
-<msg timestamp="20150818 17:54:08.622" level="DEBUG">POST http://127.0.0.1:46947/session/7c9cab6e1fce8b22a044d5c00aab6e7e/elements {"using": "xpath", "sessionId": "7c9cab6e1fce8b22a044d5c00aab6e7e", "value": "//button[(@id='button_save' or @name='button_save' or @value='button_save' or normalize-space(descendant-or-self::text())='button_save')]"}</msg>
-<msg timestamp="20150818 17:54:08.650" level="DEBUG">Finished Request</msg>
-<msg timestamp="20150818 17:54:08.650" level="DEBUG">POST http://127.0.0.1:46947/session/7c9cab6e1fce8b22a044d5c00aab6e7e/element/0.24048321833834052-3/click {"sessionId": "7c9cab6e1fce8b22a044d5c00aab6e7e", "id": "0.24048321833834052-3"}</msg>
-<msg timestamp="20150818 17:54:08.712" level="DEBUG">Finished Request</msg>
-<msg timestamp="20150818 17:54:08.713" level="TRACE">Return: None</msg>
-<status status="PASS" endtime="20150818 17:54:08.713" starttime="20150818 17:54:08.592"></status>
-</kw>
-<msg timestamp="20150818 17:54:08.714" level="TRACE">Return: None</msg>
-<status status="PASS" endtime="20150818 17:54:08.714" starttime="20150818 17:54:08.591"></status>
-</kw>
-<status status="PASS" endtime="20150818 17:54:08.715" critical="yes" starttime="20150818 17:54:03.994"></status>
+<status status="FAIL" endtime="20150901 16:19:03.451" critical="yes" starttime="20150901 16:19:03.394">SSLError: [Errno bad handshake] (-1, 'Unexpected EOF')</status>
 </test>
-<doc>A test suite with a single test for valid login.
-
-This test has a workflow that is created using keywords in
-the imported resource file.</doc>
-<status status="PASS" endtime="20150818 17:54:08.716" starttime="20150818 17:54:03.893"></status>
+<kw type="teardown" name="Delete All Sessions" library="RequestsLibrary">
+<doc>Removes all the session objects</doc>
+<status status="PASS" endtime="20150901 16:19:03.453" starttime="20150901 16:19:03.452"></status>
+</kw>
+<doc>Creating a sale with validations</doc>
+<status status="FAIL" endtime="20150901 16:19:03.453" starttime="20150901 16:19:02.372"></status>
 </suite>
-<status status="PASS" endtime="20150818 17:54:08.718" starttime="20150818 17:54:03.852"></status>
+<status status="FAIL" endtime="20150901 16:19:03.454" starttime="20150901 16:19:02.331"></status>
 </suite>
 <statistics>
 <total>
-<stat fail="0" pass="1">Critical Tests</stat>
-<stat fail="0" pass="1">All Tests</stat>
+<stat fail="1" pass="0">Critical Tests</stat>
+<stat fail="1" pass="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat fail="0" id="s1" name="Login Tests" pass="1">Login Tests</stat>
-<stat fail="0" id="s1-s1" name="Valid Login" pass="1">Login Tests.Valid Login</stat>
+<stat fail="1" id="s1" name="Login Tests" pass="0">Login Tests</stat>
+<stat fail="1" id="s1-s1" name="Valid Login" pass="0">Login Tests.Valid Login</stat>
 </suite>
 </statistics>
 <errors>
