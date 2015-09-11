@@ -1,0 +1,18 @@
+*** Settings ***
+Documentation     A resource file with reusable keywords and variables.
+...
+...               The system specific keywords created here form our own
+...               domain specific language. They utilize keywords provided
+...               by the imported Selenium2Library.
+Library           Requests
+Library           String
+
+*** Variables ***
+${SERVER}           https://luna.met.ms/api/v1/
+#${BROWSER}          Firefox
+#${DELAY}            0
+${VALID USER}       test
+${VALID PASSWORD}   O9CBSF4H
+#${LOGIN URL}        ${SERVER}
+#${WELCOME URL}      https://luna.met.ms/dashboard/
+${ERROR MESSAGE}    

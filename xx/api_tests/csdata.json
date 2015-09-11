@@ -1,0 +1,37 @@
+<<<<<<< HEAD
+{"pre_auth": false, "secure_option": "No", "customer_email": "nesatuf@outlook.com", "order_id": "Nst-Luna-022314345426500", "pos": "/api/v1/pos/akbank/", "half_secure": true, "currency": "/api/v1/currency/USD/", "billing_address": "1295 Charleston", "is_dcc_enabled": false, "billing_country": "US", "max_retry_count": 5, "customer_last_name": "Morata", "billing_city": "Mountain View", "installment": 1, "billing_zipcode": "34845", "amount": 202.1, "customer_ip_address": "10.11.27.232", "fraud_check_enabled": true, "items": [{"photo": "http://d1ldkdiqjyt22f.cloudfront.net/hotelimages/UKSFLE/1937525_140.jpeg", "name": "Ramada Hotel", "unit_price": 150.0, "quantity": 1}], "customer_first_name": "Sergio", "billing_state": "CA", "sale_data": {"cybersource": {"mddFields": {"1": "Nesat", "98": "4", "3": "Turkey", "2": "Ufuk"}}}}
+=======
+pos   /api/v1/pos/otel-gc/
+amount   299.00
+currency   /api/v1/currency/USD/,
+items   [{name: Ramada Hotel,
+					photo: http://d1ldkdiqjyt22f.cloudfront.net/hotelimages/UKSFLE/1937525_140.jpeg,
+ 					quantity: 1,
+ 					unit_price: 150.0}]
+order_id   Nst-Luna-0240230620151604
+max_retry_count   5
+installment   1
+is_dcc_enabled   False
+pre_auth   False
+fraud_check_enabled   True
+half_secure   True
+secure_option   No
+sale_data   {submerchantname: nesatsubmerchav02,
+					cybersource:
+					{mddFields:
+					{1: Nesat, 
+					2: Ufuk, 
+					3: Turkey, 
+					98: 4}},
+					payment_methods: [unionpay]
+				}
+customer_first_name   Angel Di
+customer_last_name   Maria
+customer_email   mustafa.tasli@paytrek.com
+customer_ip_address   201.101.26.242
+billing_address   1295 Charleston 
+billing_city   Mountain View
+billing_state   CA
+billing_country   US
+billing_zipcode   34845
+>>>>>>> apicalls

@@ -1,0 +1,51 @@
+*** Settings ***
+Suite Setup       Open Browser To Login Page
+Suite Teardown    Close Browser
+Test Setup        Go To Login Page
+#Test Template     Account Should Be Locked For 10 Minutes
+Resource          resource.txt
+
+*** Test Cases ***    User Name        Password
+Invalid Password Try1
+	[Tags]   Regression   Dashboard
+	${invalid password}=   Generate Random String   8   [LETTERS][NUMBERS]
+	Input Username    ${VALID USER}
+	Input Password     ${invalid password}
+	Log   ${invalid password}
+	Submit Credentials
+	Login Should Have Failed
+
+Invalid Password Try2
+	[Tags]   Regression   Dashboard
+	${invalid password}=   Generate Random String   8   [LETTERS][NUMBERS]
+	Input Username    ${VALID USER}
+	Input Password     ${invalid password}
+	Log   ${invalid password}
+	Submit Credentials
+	Login Should Have Failed
+
+
+Invalid Password Try3
+	[Tags]   Regression   Dashboard
+	${invalid password}=   Generate Random String   8   [LETTERS][NUMBERS]
+	Input Username    ${VALID USER}
+	Input Password     ${invalid password}
+	Log   ${invalid password}
+	Submit Credentials
+	Consecutive Login Should Have Failed
+
+*** Keywords ***
+Consecutive Login Should Have Failed
+    Page Should Contain    This account has been locked because of 3 failed login attempts.    loglevel=INFO
+Login Should Have Failed
+    Page Should Contain    Sorry, could not find any user with the given username / password.    loglevel=INFO
+
+
+#*** Keywords ***
+#Account Should Be Locked For 10 Minutes
+#    [Arguments]    ${username}    ${password}
+#    Input Username    ${username}
+#    Input Password    ${password}
+#    Submit Credentials
+#    Login Should Have Failed
+
